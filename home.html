@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Voices of Our Mothers - Home</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Allura&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100%;
+  font-family: "Montserrat", Arial, sans-serif;
+  background: #00351a;
+}
+
+body {
+  color: #ffffff;
+}
+
+.page {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at -10% -10%, rgba(255,255,255,0.08), transparent 45%),
+    linear-gradient(180deg, #1b6548 0%, #0c472f 45%, #00351a 100%);
+}
+
+.top {
+  position: relative;
+  padding: 26px 22px 30px;
+  text-align: center;
+}
+
+.menu,
+.bell {
+  position: absolute;
+  top: 28px;
+  color: #e8c05b;
+  font-size: 28px;
+  text-decoration: none;
+}
+
+.menu {
+  left: 24px;
+}
+
+.bell {
+  right: 24px;
+}
+
+.logo {
+  width: 110px;
+  max-width: 32vw;
+  margin-bottom: 12px;
+}
+
+.brand-title {
+  color: #e8c05b;
+  font-size: clamp(28px, 7vw, 54px);
+  line-height: 0.98;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 0 3px 12px rgba(0,0,0,0.25);
+}
+
+.welcome {
+  font-family: "Allura", cursive;
+  font-size: clamp(44px, 10vw, 72px);
+  line-height: 1;
+  margin: 26px 0 10px;
+  text-shadow: 0 3px 12px rgba(0,0,0,0.25);
+}
+
+.divider {
+  width: 180px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e8c05b, transparent);
+  margin: 18px auto;
+  position: relative;
+}
+
+.divider::after {
+  content: "◆";
+  color: #e8c05b;
+  background: #0c472f;
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  transform: translateX(-50%);
+  font-size: 14px;
+  padding: 0 8px;
+}
+
+.tagline {
+  font-size: clamp(17px, 3.5vw, 28px);
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+.cards-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff8e9;
+  padding: 28px;
+  border-radius: 32px 32px 0 0;
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 -10px 35px rgba(0,0,0,0.18);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.card {
+  min-height: 170px;
+  background: #fffdf5;
+  border: 1px solid rgba(120, 80, 20, 0.15);
+  border-radius: 22px;
+  text-decoration: none;
+  color: #00351a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.18);
+}
+
+.icon {
+  font-size: 48px;
+  color: #b77a10;
+}
+
+.card span {
+  font-size: clamp(16px, 3vw, 28px);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.bottom-pattern {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  display: block;
+  opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+  .top {
+    padding: 22px 16px 24px;
+  }
+
+  .menu,
+  .bell {
+    font-size: 22px;
+    top: 22px;
+  }
+
+  .logo {
+    width: 72px;
+  }
+
+  .brand-title {
+    font-size: 24px;
+  }
+
+  .welcome {
+    font-size: 42px;
+    margin-top: 18px;
+  }
+
+  .tagline {
+    font-size: 15px;
+  }
+
+  .cards-section {
+    padding: 10px;
+    border-radius: 18px 18px 0 0;
+  }
+
+  .cards {
+    gap: 8px;
+  }
+
+  .card {
+    min-height: 105px;
+    border-radius: 12px;
+    padding: 12px 8px;
+    gap: 8px;
+  }
+
+  .icon {
+    font-size: 30px;
+  }
+
+  .card span {
+    font-size: 13px;
+  }
+
+  .bottom-pattern {
+    height: 58px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="page">
+
+  <section class="top">
+    <a href="#" class="menu">☰</a>
+    <a href="#" class="bell">♢</a>
+
+    <img src="./logo.png" alt="Voices of Our Mothers Logo" class="logo" />
+
+    <h1 class="brand-title">
+      Voices of<br>
+      Our Mothers
+    </h1>
+
+    <div class="welcome">Welcome!</div>
+
+    <div class="divider"></div>
+
+    <p class="tagline">
+      Every story matters.<br>
+      Every voice deserves<br>
+      to be preserved.
+    </p>
+  </section>
+
+  <section class="cards-section">
+    <div class="cards">
+
+      <a href="#" class="card">
+        <div class="icon">🎙️</div>
+        <span>Record Story</span>
+      </a>
+
+      <a href="#" class="card">
+        <div class="icon">📖</div>
+        <span>Browse Stories</span>
+      </a>
+
+      <a href="#" class="card">
+        <div class="icon">🔍</div>
+        <span>Search<br>Stories</span>
+      </a>
+
+      <a href="#" class="card">
+        <div class="icon">🌍</div>
+        <span>Languages</span>
+      </a>
+
+      <a href="#" class="card">
+        <div class="icon">🤲</div>
+        <span>Community<br>Impact</span>
+      </a>
+
+      <a href="#" class="card">
+        <div class="icon">👤</div>
+        <span>Profile</span>
+      </a>
+
+    </div>
+  </section>
+
+  <img src="./pattern.png" alt="" class="bottom-pattern" />
+
+</main>
+
+</body>
+</html>
