@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Select Category</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100%;
+  font-family: "Montserrat", Arial, sans-serif;
+  background: #00351a;
+}
+
+body {
+  color: #2a2418;
+}
+
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at -10% -15%, rgba(255,255,255,0.07), transparent 45%),
+    linear-gradient(180deg, #1b6548 0%, #0b4a2d 42%, #00351a 100%);
+  overflow-x: hidden;
+}
+
+.hero-header {
+  position: relative;
+  text-align: center;
+  padding: 28px 24px 42px;
+  color: #e8c05b;
+}
+
+.menu,
+.notification {
+  position: absolute;
+  top: 28px;
+  color: #e8c05b;
+  text-decoration: none;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.menu {
+  left: 24px;
+}
+
+.notification {
+  right: 28px;
+}
+
+.logo {
+  width: clamp(82px, 13vw, 120px);
+  display: block;
+  margin: 0 auto 20px;
+}
+
+.brand-title {
+  font-size: clamp(30px, 5vw, 58px);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 4px 14px rgba(0,0,0,0.22);
+}
+
+.content-panel {
+  width: min(92%, 980px);
+  margin: 0 auto 36px;
+  background: #fff8e9;
+  border-radius: 32px;
+  padding: clamp(18px, 3vw, 36px);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.22);
+}
+
+.panel-title {
+  color: #00351a;
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 900;
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.category {
+  min-height: 100px;
+  background: #fffdf6;
+  border: 1px solid rgba(90,60,20,0.12);
+  border-radius: 20px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 58px 1fr 24px;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: #2a2418;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.09);
+  transition: 0.25s ease;
+}
+
+.category:hover {
+  border-color: #d9a521;
+  background: #fffdf9;
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.14);
+}
+
+.category:active {
+  transform: scale(0.98);
+}
+
+.icon-box {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: #efe4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.category:nth-child(2) .icon-box { background: #fff0d9; }
+.category:nth-child(3) .icon-box { background: #fff3bd; }
+.category:nth-child(4) .icon-box { background: #ffe3df; }
+.category:nth-child(5) .icon-box { background: #eef6df; }
+.category:nth-child(6) .icon-box { background: #efe4ff; }
+
+.category-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.category-title {
+  font-size: clamp(14px, 1.6vw, 20px);
+  line-height: 1.25;
+  font-weight: 800;
+  color: #1f241d;
+}
+
+.category-description {
+  font-size: clamp(11px, 1.2vw, 14px);
+  color: #6c675e;
+  line-height: 1.4;
+}
+
+.arrow {
+  font-size: 30px;
+  color: #6f624d;
+}
+
+@media (max-width: 720px) {
+  .hero-header {
+    padding: 20px 18px 28px;
+  }
+
+  .menu,
+  .notification {
+    top: 22px;
+    font-size: 26px;
+  }
+
+  .content-panel {
+    width: 100%;
+    margin-bottom: 0;
+    border-radius: 26px 26px 0 0;
+  }
+
+  .category-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .category {
+    min-height: 72px;
+    border-radius: 14px;
+    padding: 12px;
+    grid-template-columns: 46px 1fr 20px;
+  }
+
+  .icon-box {
+    width: 42px;
+    height: 42px;
+    font-size: 23px;
+  }
+
+  .category-description {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="page">
+
+  <header class="hero-header">
+    <a href="index.html" class="menu">☰</a>
+    <a href="#" class="notification">♢</a>
+
+    <img src="./logo.png" alt="Voices of Our Mothers Logo" class="logo">
+
+    <h1 class="brand-title">
+      Voices of<br>
+      Our Mothers
+    </h1>
+  </header>
+
+  <section class="content-panel">
+    <h2 class="panel-title">Select Category</h2>
+
+    <div class="category-list">
+
+      <a href="browse_stories.html" class="category">
+        <div class="icon-box">🤰</div>
+        <div class="category-content">
+          <div class="category-title">Pregnancy &amp; Birth</div>
+          <div class="category-description">Stories, traditions and maternal experiences.</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a href="browse_stories.html" class="category">
+        <div class="icon-box">👩‍👧</div>
+        <div class="category-content">
+          <div class="category-title">Childcare &amp; Parenting</div>
+          <div class="category-description">Wisdom on raising, nurturing and caring for children.</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a href="browse_stories.html" class="category">
+        <div class="icon-box">👨‍👩‍👧</div>
+        <div class="category-content">
+          <div class="category-title">Family Histories</div>
+          <div class="category-description">Memories, family roots and generational stories.</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a href="marriage-customs.html" class="category">
+        <div class="icon-box">💍</div>
+        <div class="category-content">
+          <div class="category-title">Marriage &amp; Family Customs</div>
+          <div class="category-description">Cultural practices around union, home and family life.</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a href="browse_stories.html" class="category">
+        <div class="icon-box">🧑‍🤝‍🧑</div>
+        <div class="category-content">
+          <div class="category-title">Community Traditions</div>
+          <div class="category-description">Shared ceremonies, values and community wisdom.</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a href="browse_stories.html" class="category">
+        <div class="icon-box">🗣️</div>
+        <div class="category-content">
+          <div class="category-title">Indigenous Language Preservation</div>
+          <div class="category-description">Protecting languages, sayings and oral heritage.</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

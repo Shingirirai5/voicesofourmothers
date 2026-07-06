@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Browse Stories</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100%;
+  font-family: "Montserrat", Arial, sans-serif;
+  background: #00351a;
+}
+
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at -10% -15%, rgba(255,255,255,0.07), transparent 45%),
+    linear-gradient(180deg, #1b6548 0%, #0b4a2d 42%, #00351a 100%);
+  color: #1f241d;
+  padding-bottom: 84px;
+}
+
+.hero-header {
+  position: relative;
+  text-align: center;
+  padding: 20px 24px 26px;
+  color: #e8c05b;
+}
+
+.menu,
+.notification {
+  position: absolute;
+  top: 24px;
+  color: #e8c05b;
+  text-decoration: none;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.menu { left: 24px; }
+.notification { right: 28px; }
+
+.page-title {
+  font-size: clamp(24px, 4vw, 42px);
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #fff8dc;
+}
+
+.content-panel {
+  width: min(94%, 980px);
+  margin: 0 auto;
+  background: #fff8e9;
+  border-radius: 28px 28px 0 0;
+  padding: clamp(14px, 3vw, 30px);
+  min-height: calc(100vh - 92px);
+  box-shadow: 0 -12px 40px rgba(0,0,0,0.2);
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.tab {
+  border: none;
+  background: #fffdf6;
+  color: #00351a;
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.tab.active {
+  background: #006b2e;
+  color: #fff8dc;
+}
+
+.story-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.story-card {
+  display: grid;
+  grid-template-columns: 58px 1fr 42px;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: #fffdf6;
+  border: 1px solid rgba(90,60,20,0.12);
+  border-radius: 20px;
+  color: #1f241d;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+  transition: 0.25s ease;
+}
+
+.story-card:hover {
+  transform: translateY(-3px);
+  border-color: #d9a521;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.14);
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ddd;
+}
+
+.story-title {
+  font-size: clamp(14px, 1.7vw, 19px);
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.story-author {
+  font-size: clamp(12px, 1.3vw, 15px);
+  font-weight: 700;
+  color: #4d4638;
+  margin-bottom: 3px;
+}
+
+.story-category {
+  font-size: clamp(11px, 1.2vw, 14px);
+  color: #6f675a;
+  font-weight: 600;
+}
+
+.play {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: #006b2e;
+  color: #fff8dc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,83,35,0.28);
+  transition: 0.2s ease;
+}
+
+.play:hover {
+  background: #008239;
+  transform: scale(1.08);
+}
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.78);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+}
+
+.video-modal.show {
+  display: flex;
+}
+
+.video-box {
+  position: relative;
+  width: min(92vw, 760px);
+  background: #00351a;
+  border: 1px solid rgba(232,192,91,0.35);
+  border-radius: 22px;
+  padding: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+}
+
+.video-box video {
+  width: 100%;
+  max-height: 75vh;
+  border-radius: 14px;
+  display: block;
+  background: #000;
+}
+
+.close-video {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: #e8c05b;
+  color: #00351a;
+  font-size: 28px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(100%, 980px);
+  height: 72px;
+  background: #fffdf6;
+  border-radius: 22px 22px 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  box-shadow: 0 -8px 28px rgba(0,0,0,0.15);
+  z-index: 50;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #5c5549;
+  font-size: 24px;
+  text-align: center;
+}
+
+.nav-item.active {
+  color: #006b2e;
+}
+
+@media (max-width: 650px) {
+  .page { padding-bottom: 64px; }
+
+  .hero-header {
+    padding: 14px 18px 18px;
+  }
+
+  .menu,
+  .notification {
+    top: 16px;
+    font-size: 22px;
+  }
+
+  .content-panel {
+    width: 100%;
+    border-radius: 18px 18px 0 0;
+    padding: 10px;
+  }
+
+  .tabs {
+    gap: 7px;
+    margin-bottom: 10px;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 9px 8px;
+    font-size: 12px;
+  }
+
+  .story-list { gap: 8px; }
+
+  .story-card {
+    grid-template-columns: 44px 1fr 34px;
+    gap: 9px;
+    padding: 10px;
+    border-radius: 13px;
+  }
+
+  .avatar {
+    width: 42px;
+    height: 42px;
+  }
+
+  .story-title { font-size: 12px; }
+  .story-author,
+  .story-category { font-size: 10px; }
+
+  .play {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .bottom-nav {
+    height: 58px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .nav-item { font-size: 21px; }
+
+  .close-video {
+    top: -12px;
+    right: -10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="page">
+
+  <header class="hero-header">
+    <a href="home.html" class="menu">☰</a>
+    <h1 class="page-title">Browse Stories</h1>
+    <a href="#" class="notification">♢</a>
+  </header>
+
+  <section class="content-panel">
+
+    <div class="tabs">
+      <button class="tab active" type="button">All</button>
+      <button class="tab" type="button">Recent</button>
+      <button class="tab" type="button">Popular</button>
+    </div>
+
+    <div class="story-list">
+
+      <article class="story-card">
+        <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=120&q=80" class="avatar" alt="Story author">
+        <div>
+          <div class="story-title">A Mother's Prayer</div>
+          <div class="story-author">Zinhlewe | Shona</div>
+          <div class="story-category">Pregnancy &amp; Birth</div>
+        </div>
+        <button class="play" type="button" data-video="./videos/story1.mp4">▶</button>
+      </article>
+
+      <article class="story-card">
+        <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=120&q=80" class="avatar" alt="Story author">
+        <div>
+          <div class="story-title">Lessons from Grandmother</div>
+          <div class="story-author">South Africa | isiZulu</div>
+          <div class="story-category">Childcare &amp; Parenting</div>
+        </div>
+        <button class="play" type="button" data-video="./videos/story2.mp4">▶</button>
+      </article>
+
+      <article class="story-card">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=120&q=80" class="avatar" alt="Story author">
+        <div>
+          <div class="story-title">Our Family Journey</div>
+          <div class="story-author">Kenya | Kikuyu</div>
+          <div class="story-category">Family Histories</div>
+        </div>
+        <button class="play" type="button" data-video="./videos/story3.mp4">▶</button>
+      </article>
+
+      <article class="story-card">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80" class="avatar" alt="Story author">
+        <div>
+          <div class="story-title">The Wedding Traditions</div>
+          <div class="story-author">Ghana | Twi</div>
+          <div class="story-category">Marriage &amp; Family Customs</div>
+        </div>
+        <button class="play" type="button" data-video="./videos/story4.mp4">▶</button>
+      </article>
+
+      <article class="story-card">
+        <img src="https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?auto=format&fit=crop&w=120&q=80" class="avatar" alt="Story author">
+        <div>
+          <div class="story-title">Songs of the Village</div>
+          <div class="story-author">Botswana | Setswana</div>
+          <div class="story-category">Community Traditions</div>
+        </div>
+        <button class="play" type="button" data-video="./videos/story5.mp4">▶</button>
+      </article>
+
+    </div>
+
+  </section>
+
+  <div class="video-modal" id="videoModal" aria-hidden="true">
+    <div class="video-box">
+      <button class="close-video" id="closeVideo" type="button" aria-label="Close video">×</button>
+      <video id="storyVideo" controls playsinline></video>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="home.html" class="nav-item">⌂</a>
+    <a href="record.html" class="nav-item">🎙</a>
+    <a href="browse.html" class="nav-item active">⌕</a>
+    <a href="profile.html" class="nav-item">♙</a>
+  </nav>
+
+</main>
+
+<script>
+const modal = document.getElementById("videoModal");
+const video = document.getElementById("storyVideo");
+const closeBtn = document.getElementById("closeVideo");
+
+function openVideo(src) {
+  video.src = src;
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden", "false");
+  video.play().catch(() => {});
+}
+
+function closeVideo() {
+  video.pause();
+  video.currentTime = 0;
+  video.removeAttribute("src");
+  video.load();
+  modal.classList.remove("show");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+document.querySelectorAll(".play").forEach(button => {
+  button.addEventListener("click", function () {
+    const videoSrc = this.getAttribute("data-video");
+    openVideo(videoSrc);
+  });
+});
+
+closeBtn.addEventListener("click", closeVideo);
+
+modal.addEventListener("click", function (event) {
+  if (event.target === modal) {
+    closeVideo();
+  }
+});
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape" && modal.classList.contains("show")) {
+    closeVideo();
+  }
+});
+</script>
+
+</body>
+</html>
